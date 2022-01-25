@@ -2,11 +2,13 @@ import React from "react";
 import "./online.css";
 
 const Online = ({ user }) => {
+  const PublicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
+
   return (
     <li className="rightbarFriend">
       <div className="rightbarProfileImageContainer">
         <img
-          src={user.profilePicture}
+          src={PublicFolder + user.profilePicture}
           alt=""
           className="rightbarProfileImage"
         />

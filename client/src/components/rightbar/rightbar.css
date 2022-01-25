@@ -62,6 +62,25 @@
   margin-bottom: 30px;
 }
 
+.rightFollowButton {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  background-color: #1872f2;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  color: white;
+  padding: 5px 10px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.rightFollowButton:focus {
+  outline: none;
+}
+
 .rightbarTitle {
   font-size: 18px;
   font-weight: 500;

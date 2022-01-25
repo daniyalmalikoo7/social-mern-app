@@ -1,11 +1,19 @@
 import "./topbar.css";
 import { Search, Person, Chat, Notifications } from "@mui/icons-material";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const Topbar = () => {
+  const { user } = useContext(AuthContext);
+  const PublicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
+
   return (
     <div className="topbarContainer ">
       <div className="topbarLeft">
-        <span className="logo">TrexSocial</span>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <span className="logo">TrexSocial</span>
+        </Link>
       </div>
 
       <div className="topbarCenter">
@@ -37,7 +45,25 @@ const Topbar = () => {
             <span className="topbarIconBadge">1</span>
           </div>
         </div>
-        <img src="/assets/person/2.jpeg" alt="" className="topbarImage" />
+        <div className="topbarUser">
+          <span className="topbarName">
+            Welcome,
+            <Link to={`/profile/${user.username}`}>
+              <span> {user.username}!</span>
+            </Link>
+          </span>
+          <Link to={`/profile/${user.username}`}>
+            <img
+              src={
+                user.profilePicture
+                  ? PublicFolder + user.profilePicture
+                  : PublicFolder + "/person/noAvatar.png"
+              }
+              alt=""
+              className="topbarImage"
+            />
+          </Link>
+        </div>
       </div>
     </div>
   );

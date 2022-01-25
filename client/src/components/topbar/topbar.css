@@ -94,3 +94,14 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
+.topbarUser {
+  display: flex;
+  align-items: center;
+}
+
+.topbarName {
+  margin-right: 5px;
+  font-size: 14px;
+  font-weight: 300;
+}
