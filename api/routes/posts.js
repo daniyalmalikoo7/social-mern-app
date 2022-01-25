@@ -63,7 +63,7 @@ router.put("/:id/like", async (req, res) => {
       res.status(200).json("Post has been liked");
     } else {
       await post.updateOne({ $pull: { likes: req.body.userId } });
-      res.status(200).json("Disliked");
+      res.status(200).json("Post has been disliked");
     }
   } catch (error) {
     res.status(500).json(error);
@@ -86,9 +86,9 @@ router.get("/:id", async (req, res) => {
 
 //get timeline posts
 
-router.get("/timeline/all", async (req, res) => {
+router.get("/timeline/:userId", async (req, res) => {
   try {
-    const currentUser = await User.findById(req.body.userId);
+    const currentUser = await User.findById(req.params.userId);
     console.log(currentUser);
     const userPosts = await Post.find({ userId: currentUser._id });
     //use promise to iterate through data in case, if you directly use await inside it wont fetch all data
@@ -98,6 +98,18 @@ router.get("/timeline/all", async (req, res) => {
       })
     );
     res.status(200).json(userPosts.concat(...friendPosts));
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+});
+
+//get user's all posts
+
+router.get("/profile/:username", async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.params?.username });
+    const posts = await Post.find({ userId: user._id });
+    res.status(200).json(posts);
   } catch (error) {
     res.status(500).json(error.message);
   }
